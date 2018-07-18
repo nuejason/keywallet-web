@@ -3,6 +3,18 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { fetchWeather } from '../actions/index';
 
+var ws;
+
+function initWebSocket() {
+    ws = new WebSocket("wss://keytoken.co.kr:58443/localserver");
+    ws.onopen = function(event)  { console.log(event); };
+    ws.onerror = function(event) { console.log(event); };
+    ws.onclose = function(event) { console.log(event); };
+    ws.onmessage = function(event) {
+      console.log(event.data);
+    }
+}
+
 class SearchBar extends Component {
   constructor(props) {
     super(props);
@@ -11,6 +23,7 @@ class SearchBar extends Component {
 
     this.onInputChange = this.onInputChange.bind(this);
     this.onFormSubmit = this.onFormSubmit.bind(this);
+    initWebSocket();
   }
 
   onInputChange(event) {
@@ -23,6 +36,7 @@ class SearchBar extends Component {
     // We need to go and fetch weather data
     this.props.fetchWeather(this.state.term);
     this.setState({term: '' });
+    ws.send('send data');
   }
 
   render() {
