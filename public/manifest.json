@@ -1,0 +1,24 @@
+{
+  "manifest_version": 2,
+
+  "name": "KeyWallet Extension",
+  "description": "KeyWallet Chrome Extension",
+  "version": "1.0.0",
+
+  "browser_action": {
+    "default_title": "KeyWallet"
+  },
+  "background": {
+    "persistent": false,
+    "scripts": ["background.js"]
+  },
+  "icons": {
+    "16": "keywallet-logo.png",
+    "48": "keywallet-logo.png",
+    "128": "keywallet-logo.png"
+  },
+  "permissions": [
+    "tabs",
+    "fullscreen"
+  ]
+}
